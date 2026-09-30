@@ -1,12 +1,14 @@
 # ProcureAI — Enterprise AI-Powered Procurement & Supplier Management Platform
 
-[![Backend Live Status](https://img.shields.io/badge/Render-Deployed%20Live-brightgreen?style=for-the-badge&logo=render)](https://procureai-backend-1.onrender.com/api/health)
+[![Frontend Live Web App](https://img.shields.io/badge/Vercel-Frontend%20Live-black?style=for-the-badge&logo=vercel)](https://procure-ai-frontend-seven.vercel.app/login)
+[![Backend Live API](https://img.shields.io/badge/Render-Backend%20Live-brightgreen?style=for-the-badge&logo=render)](https://procureai-backend-1.onrender.com/api/health)
 [![API Health Check](https://img.shields.io/badge/Health%20Check-HTTP%20200%20OK-blue?style=for-the-badge)](https://procureai-backend-1.onrender.com/api/health)
 [![Supabase Database](https://img.shields.io/badge/Database-Supabase%20Connected-3ECF8E?style=for-the-badge&logo=supabase)](https://oeunwfqixbfcxlgvfmow.supabase.co)
 
-> 🚀 **Live Production Backend API Base URL**:  
-> **[`https://procureai-backend-1.onrender.com/api`](https://procureai-backend-1.onrender.com/api)**  
-> 🩺 **Live Health Probe**: [`https://procureai-backend-1.onrender.com/api/health`](https://procureai-backend-1.onrender.com/api/health)
+> 🌐 **Live Production Deployments**:  
+> * **Frontend Application**: [`https://procure-ai-frontend-seven.vercel.app/login`](https://procure-ai-frontend-seven.vercel.app/login)  
+> * **Backend REST API**: [`https://procureai-backend-1.onrender.com/api`](https://procureai-backend-1.onrender.com/api)  
+> * **API Health Probe**: [`https://procureai-backend-1.onrender.com/api/health`](https://procureai-backend-1.onrender.com/api/health)
 
 ProcureAI is a production-grade, multi-tenant enterprise SaaS platform engineered for companies that purchase raw materials, industrial components, equipment, and services across global supply chains.
 
