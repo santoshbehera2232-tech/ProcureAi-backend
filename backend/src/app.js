@@ -8,6 +8,9 @@ import { ENV } from './config/env.js';
 
 const app = express();
 
+// Trust reverse proxies (Render, Railway, Heroku, AWS, Cloudflare)
+app.set('trust proxy', 1);
+
 // Security HTTP headers
 app.use(helmet({
   crossOriginResourcePolicy: { policy: "cross-origin" }
