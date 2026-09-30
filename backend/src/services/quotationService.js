@@ -40,14 +40,14 @@ export const quotationService = {
     const supplier = await dbService.findOne('suppliers', { id: supplierId });
     if (!supplier) throw { status: 400, message: 'Valid supplier profile required to submit quotation.' };
 
-    const subtotal = parseFloat(data.subtotal) || 0.00;
+    const subtotal = parseFloat(data.subtotal) || parseFloat(data.taxable_amount) || 0.00;
     const discount_amount = parseFloat(data.discount_amount) || 0.00;
-    const taxable_amount = Math.max(0, subtotal - discount_amount);
+    const taxable_amount = parseFloat(data.taxable_amount) || Math.max(0, subtotal - discount_amount);
     const tax_rate = parseFloat(data.tax_rate) || 18.00;
-    const gst_amount = Math.round((taxable_amount * (tax_rate / 100)) * 100) / 100;
+    const gst_amount = parseFloat(data.gst_amount) || Math.round((taxable_amount * (tax_rate / 100)) * 100) / 100;
     const freight_charges = parseFloat(data.freight_charges) || 0.00;
     const other_charges = parseFloat(data.other_charges) || 0.00;
-    const grand_total = taxable_amount + gst_amount + freight_charges + other_charges;
+    const grand_total = parseFloat(data.grand_total) || (taxable_amount + gst_amount + freight_charges + other_charges);
 
     const count = (await dbService.query('quotations', { organization_id: rfq.organization_id })).length;
     const quotation_number = data.quotation_number || `QT-${(supplier.supplier_code || 'SUP').replace(/[^a-zA-Z0-9]/g, '')}-${String(count + 1001)}`;
@@ -91,7 +91,7 @@ export const quotationService = {
     await notificationService.create({
       organization_id: rfq.organization_id,
       title: 'Quotation Received',
-      message: `${supplier.name} submitted quotation ${quotation_number} (₹${grand_total.toLocaleString('en-IN')}) for ${rfq.rfq_number}.`,
+      message: `${supplier.name} submitted quotation ${quotation_number} (₹${Number(grand_total || 0).toLocaleString('en-IN')}) for ${rfq.rfq_number}.`,
       type: 'Quotation',
       link: `/quotations/compare?rfq_id=${rfq.id}`
     });

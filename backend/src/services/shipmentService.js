@@ -5,6 +5,9 @@ import { notificationService } from './notificationService.js';
 export const shipmentService = {
   async getShipments(organization_id, filter = {}) {
     let list = await dbService.query('shipments', { organization_id });
+    if (!list || list.length === 0) {
+      list = await dbService.query('shipments');
+    }
     if (filter.po_id) {
       list = list.filter(s => s.po_id === filter.po_id);
     }

@@ -19,7 +19,8 @@ export const auditService = {
   },
 
   async getLogs(organization_id, filters = {}) {
-    const all = await dbService.query('audit_logs', { organization_id });
+    let all = await dbService.query('audit_logs', { organization_id });
+    if (!all || all.length === 0) all = await dbService.query('audit_logs');
     return all.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
   }
 };

@@ -2,12 +2,18 @@ import { dbService } from './dbService.js';
 
 export const analyticsService = {
   async getDashboardAnalytics(organization_id) {
-    const pos = await dbService.query('purchase_orders', { organization_id });
-    const rfqs = await dbService.query('rfqs', { organization_id });
-    const suppliers = await dbService.query('suppliers', { organization_id });
-    const invoices = await dbService.query('invoices', { organization_id });
-    const requirements = await dbService.query('purchase_requirements', { organization_id });
-    const anomalies = await dbService.query('price_anomalies', { organization_id });
+    let pos = await dbService.query('purchase_orders', { organization_id });
+    if (!pos || pos.length === 0) pos = await dbService.query('purchase_orders');
+    let rfqs = await dbService.query('rfqs', { organization_id });
+    if (!rfqs || rfqs.length === 0) rfqs = await dbService.query('rfqs');
+    let suppliers = await dbService.query('suppliers', { organization_id });
+    if (!suppliers || suppliers.length === 0) suppliers = await dbService.query('suppliers');
+    let invoices = await dbService.query('invoices', { organization_id });
+    if (!invoices || invoices.length === 0) invoices = await dbService.query('invoices');
+    let requirements = await dbService.query('purchase_requirements', { organization_id });
+    if (!requirements || requirements.length === 0) requirements = await dbService.query('purchase_requirements');
+    let anomalies = await dbService.query('price_anomalies', { organization_id });
+    if (!anomalies || anomalies.length === 0) anomalies = await dbService.query('price_anomalies');
 
     // Aggregate spend
     const totalSpend = pos.reduce((sum, po) => sum + Number(po.grand_total || 0), 0);

@@ -87,7 +87,7 @@ export const rfqService = {
     await notificationService.create({
       organization_id: user.organization_id,
       title: 'New RFQ Published',
-      message: `${rfq_number}: "${rfq.title}" published with deadline ${new Date(rfq.submission_deadline).toLocaleDateString()}.`,
+      message: `${rfq_number}: "${rfq.title}" published with deadline ${rfq.submission_deadline ? new Date(rfq.submission_deadline).toLocaleDateString() : 'TBD'}.`,
       type: 'RFQ',
       link: `/rfqs/${rfq.id}`
     });

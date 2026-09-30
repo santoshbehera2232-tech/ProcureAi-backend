@@ -112,7 +112,7 @@ export const purchaseOrderService = {
     await notificationService.create({
       organization_id: quote.organization_id,
       title: 'Purchase Order Generated',
-      message: `${po_number} generated for ${po.supplier_name} with total ₹${po.grand_total.toLocaleString('en-IN')}.`,
+      message: `${po_number} generated for ${po.supplier_name} with total ₹${Number(po.grand_total || 0).toLocaleString('en-IN')}.`,
       type: 'PO',
       link: `/purchase-orders/${po.id}`
     });

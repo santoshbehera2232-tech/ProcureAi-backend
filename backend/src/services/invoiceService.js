@@ -179,6 +179,7 @@ export const invoiceService = {
       grand_total,
       file_url: data.file_url || '/uploads/sample_invoice.pdf',
       verification_status,
+      match_score,
       verification_details: {
         match_score,
         po_match: !isMismatch,
@@ -209,7 +210,7 @@ export const invoiceService = {
     await notificationService.create({
       organization_id: po.organization_id,
       title: `Invoice ${invoice.invoice_number} Uploaded`,
-      message: `Invoice status: ${verification_status}. Grand total: ₹${grand_total.toLocaleString('en-IN')}.`,
+      message: `Invoice status: ${verification_status}. Grand total: ₹${Number(grand_total || 0).toLocaleString('en-IN')}.`,
       type: 'Invoice',
       link: `/invoices/${invoice.id}`
     });

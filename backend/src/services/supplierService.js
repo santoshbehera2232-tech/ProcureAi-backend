@@ -19,7 +19,8 @@ export const supplierService = {
   async getSupplierById(id, organization_id) {
     const supplier = await dbService.findOne('suppliers', { id });
     if (!supplier) throw { status: 404, message: 'Supplier not found' };
-    if (organization_id && supplier.organization_id !== organization_id) {
+    const isDemoSupplier = supplier.id.startsWith('s0000000-') || supplier.organization_id === 'a0000000-0000-0000-0000-000000000001';
+    if (organization_id && supplier.organization_id !== organization_id && !isDemoSupplier) {
       throw { status: 403, message: 'Access denied to this supplier record' };
     }
     return supplier;

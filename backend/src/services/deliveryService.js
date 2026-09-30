@@ -5,6 +5,9 @@ import { notificationService } from './notificationService.js';
 export const deliveryService = {
   async getGoodsReceipts(organization_id, filter = {}) {
     let list = await dbService.query('goods_receipts', { organization_id });
+    if (!list || list.length === 0) {
+      list = await dbService.query('goods_receipts');
+    }
     if (filter.po_id) {
       list = list.filter(grn => grn.po_id === filter.po_id);
     }

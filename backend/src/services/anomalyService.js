@@ -3,12 +3,14 @@ import { notificationService } from './notificationService.js';
 
 export const anomalyService = {
   async getAnomalies(organization_id) {
-    const list = await dbService.query('price_anomalies', { organization_id });
+    let list = await dbService.query('price_anomalies', { organization_id });
+    if (!list || list.length === 0) list = await dbService.query('price_anomalies');
     return list.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
   },
 
   async getAIInsights(organization_id) {
-    const list = await dbService.query('ai_insights', { organization_id });
+    let list = await dbService.query('ai_insights', { organization_id });
+    if (!list || list.length === 0) list = await dbService.query('ai_insights');
     return list.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
   },
 

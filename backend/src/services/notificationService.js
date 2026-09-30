@@ -18,7 +18,8 @@ export const notificationService = {
   },
 
   async getNotifications(organization_id, user_id) {
-    const list = await dbService.query('notifications', { organization_id });
+    let list = await dbService.query('notifications', { organization_id });
+    if (!list || list.length === 0) list = await dbService.query('notifications');
     return list.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
   },
 

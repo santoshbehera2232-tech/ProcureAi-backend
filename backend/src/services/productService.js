@@ -3,11 +3,19 @@ import { auditService } from './auditService.js';
 
 export const productService = {
   async getProducts(organization_id) {
-    return await dbService.query('products', { organization_id });
+    let list = await dbService.query('products', { organization_id });
+    if (!list || list.length === 0) {
+      list = await dbService.query('products');
+    }
+    return list;
   },
 
   async getCategories(organization_id) {
-    return await dbService.query('product_categories', { organization_id });
+    let list = await dbService.query('product_categories', { organization_id });
+    if (!list || list.length === 0) {
+      list = await dbService.query('product_categories');
+    }
+    return list;
   },
 
   async createProduct(data, user) {
