@@ -11,18 +11,22 @@ const app = express();
 // Trust reverse proxies (Render, Railway, Heroku, AWS, Cloudflare)
 app.set('trust proxy', 1);
 
-// Security HTTP headers
+// Security HTTP headers with cross-origin allowance
 app.use(helmet({
-  crossOriginResourcePolicy: { policy: "cross-origin" }
+  crossOriginResourcePolicy: { policy: "cross-origin" },
+  crossOriginOpenerPolicy: false
 }));
 
-// CORS Configuration
+// CORS Configuration: Unconditionally allow all domains & credentials
 app.use(cors({
-  origin: true, // Allow frontend dev server and production domains
+  origin: (origin, callback) => callback(null, true),
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization']
 }));
+
+// Enable pre-flight across all routes
+app.options('*', cors());
 
 // Body parsing with 10mb payload limit for documents
 app.use(express.json({ limit: '10mb' }));
