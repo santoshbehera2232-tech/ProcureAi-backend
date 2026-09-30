@@ -16,7 +16,7 @@ function startServer(port, attempts = 0) {
 
   server.on('error', (err) => {
     if (err.code === 'EADDRINUSE') {
-      if (attempts < 5) {
+      if (attempts < 15) {
         console.warn(`⚠️  [Port Notice] Port ${port} is occupied. Retrying on port ${port + 1}...`);
         startServer(port + 1, attempts + 1);
       } else {
