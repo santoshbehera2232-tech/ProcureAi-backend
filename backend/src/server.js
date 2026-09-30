@@ -16,11 +16,11 @@ function startServer(port, attempts = 0) {
 
   server.on('error', (err) => {
     if (err.code === 'EADDRINUSE') {
-      if (process.env.NODE_ENV !== 'production' && !process.env.PORT && attempts < 3) {
+      if (attempts < 5) {
         console.warn(`⚠️  [Port Notice] Port ${port} is occupied. Retrying on port ${port + 1}...`);
         startServer(port + 1, attempts + 1);
       } else {
-        console.error(`❌ [Port Conflict] Port ${port} is in use. Exiting process.`);
+        console.error(`❌ [Port Conflict] Unable to bind to ports ${PORT}-${port}. Exiting process.`);
         process.exit(1);
       }
     } else {
