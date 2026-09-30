@@ -1,5 +1,13 @@
 # ProcureAI — Enterprise AI-Powered Procurement & Supplier Management Platform
 
+[![Backend Live Status](https://img.shields.io/badge/Render-Deployed%20Live-brightgreen?style=for-the-badge&logo=render)](https://procureai-backend-1.onrender.com/api/health)
+[![API Health Check](https://img.shields.io/badge/Health%20Check-HTTP%20200%20OK-blue?style=for-the-badge)](https://procureai-backend-1.onrender.com/api/health)
+[![Supabase Database](https://img.shields.io/badge/Database-Supabase%20Connected-3ECF8E?style=for-the-badge&logo=supabase)](https://oeunwfqixbfcxlgvfmow.supabase.co)
+
+> 🚀 **Live Production Backend API Base URL**:  
+> **[`https://procureai-backend-1.onrender.com/api`](https://procureai-backend-1.onrender.com/api)**  
+> 🩺 **Live Health Probe**: [`https://procureai-backend-1.onrender.com/api/health`](https://procureai-backend-1.onrender.com/api/health)
+
 ProcureAI is a production-grade, multi-tenant enterprise SaaS platform engineered for companies that purchase raw materials, industrial components, equipment, and services across global supply chains.
 
 It features complete multi-criteria algorithmic quotation evaluation, transparent AI recommendation synthesis, automated Purchase Order lifecycles with PDF generation, live carrier shipment tracking, Goods Receipt (GRN) quality inspection, GST invoice 3-way matching, price spike anomaly alerts, and immutable audit logs.
